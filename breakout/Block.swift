@@ -13,7 +13,7 @@ class Block {
     
     var blockStatus: Int
     var view: UIView
-    
+    var behavior: UICollisionBehavior
     
     init() {
         blockStatus = 2

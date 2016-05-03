@@ -54,11 +54,12 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
             }
         }
         
-        resetAnimator()
+        resetBall()
+        resetBlockCollisions()
         
     }
 
-    func resetAnimator() {
+    func resetBall() {
         dynamicAnimator.removeAllBehaviors()
         ball.center = CGPoint(x: view.center.x , y: view.center.y)
         
@@ -72,7 +73,9 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         //Create a push behavior for the ball
         
         let timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(ViewController.launchBall), userInfo: nil, repeats: false)
-        
+    }
+    
+    func resetBlockCollisions() {
         //create dynamic animator for paddle
         let paddleDynamicBehavior = UIDynamicItemBehavior(items: [paddle])
         paddleDynamicBehavior.density = 10000
@@ -81,17 +84,19 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         dynamicAnimator.addBehavior(paddleDynamicBehavior)
         
         for blockObject in blockArray {
-            let collisionBehavior = UICollisionBehavior(items: [ball, paddle, blockObject.view])
-            collisionBehavior.translatesReferenceBoundsIntoBoundary = true
-            collisionBehavior.collisionMode = .Everything
-            collisionBehavior.collisionDelegate = self
-            dynamicAnimator.addBehavior(collisionBehavior)
-            
-            let blockDynamicBehavior = UIDynamicItemBehavior(items: [blockObject.view])
-            blockDynamicBehavior.density = 10000
-            blockDynamicBehavior.resistance = 100
-            blockDynamicBehavior.allowsRotation = false
-            dynamicAnimator.addBehavior(blockDynamicBehavior)
+            if blockObject.blockStatus != 0 {
+                let collisionBehavior = UICollisionBehavior(items: [ball, paddle, blockObject.view])
+                collisionBehavior.translatesReferenceBoundsIntoBoundary = true
+                collisionBehavior.collisionMode = .Everything
+                collisionBehavior.collisionDelegate = self
+                dynamicAnimator.addBehavior(collisionBehavior)
+                
+                let blockDynamicBehavior = UIDynamicItemBehavior(items: [blockObject.view])
+                blockDynamicBehavior.density = 10000
+                blockDynamicBehavior.resistance = 100
+                blockDynamicBehavior.allowsRotation = false
+                dynamicAnimator.addBehavior(blockDynamicBehavior)
+            }
         }
     }
     
@@ -121,23 +126,16 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         dynamicAnimator.updateItemUsingCurrentState(paddle)
     }
  
-//    func collisionBehavior(behavior: UICollisionBehavior, endedContactForItem item1: UIDynamicItem, withItem item2: UIDynamicItem) {
-//        for blockObject in blockArray {
-//            if item1.isEqual(blockObject) || item2.isEqual(blockObject) {
-//                blockObject.blockHit()
-//            }
-//        }
-//    }
     func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item1: UIDynamicItem, withItem item2: UIDynamicItem, atPoint p: CGPoint) {
         print(p)
         for blockObject in blockArray {
-            if item1.isEqual(blockObject) || item2.isEqual(blockObject) {
+            let detectionArea = CGRectMake(blockObject.view.frame.origin.x - 7, blockObject.view.frame.origin.y - 7, blockObject.view.frame.width + 14, blockObject.view.frame.height + 14)
+            if detectionArea.contains(p){
                 print("block hit")
                 blockObject.blockHit()
+                //dynamicAnimator.removeBehavior()
+                break
             }
         }
     }
-    
-
 }
-
