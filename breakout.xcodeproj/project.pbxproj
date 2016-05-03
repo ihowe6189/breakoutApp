@@ -14,6 +14,7 @@
 		9D505FF01CD78CAE00B7DB40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D505FEE1CD78CAE00B7DB40 /* LaunchScreen.storyboard */; };
 		9D505FFB1CD78CAE00B7DB40 /* breakoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D505FFA1CD78CAE00B7DB40 /* breakoutTests.swift */; };
 		9D5060061CD78CAE00B7DB40 /* breakoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5060051CD78CAE00B7DB40 /* breakoutUITests.swift */; };
+		9D5060141CD78CCA00B7DB40 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5060131CD78CCA00B7DB40 /* Block.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		9D5060011CD78CAE00B7DB40 /* breakoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = breakoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5060051CD78CAE00B7DB40 /* breakoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breakoutUITests.swift; sourceTree = "<group>"; };
 		9D5060071CD78CAE00B7DB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D5060131CD78CCA00B7DB40 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				9D505FE51CD78CAE00B7DB40 /* AppDelegate.swift */,
 				9D505FE71CD78CAE00B7DB40 /* ViewController.swift */,
+				9D5060131CD78CCA00B7DB40 /* Block.swift */,
 				9D505FE91CD78CAE00B7DB40 /* Main.storyboard */,
 				9D505FEC1CD78CAE00B7DB40 /* Assets.xcassets */,
 				9D505FEE1CD78CAE00B7DB40 /* LaunchScreen.storyboard */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5060141CD78CCA00B7DB40 /* Block.swift in Sources */,
 				9D505FE81CD78CAE00B7DB40 /* ViewController.swift in Sources */,
 				9D505FE61CD78CAE00B7DB40 /* AppDelegate.swift in Sources */,
 			);

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0F351D6010ED5245093794EFF5679D60937AECF5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0F351D6010ED5245093794EFF5679D60937AECF5" : 0,
+    "0D37209FC75B31350D4F78563E9F03B8703EB229" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9BE59C3E-EF53-469C-A835-76BC1D240273",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0F351D6010ED5245093794EFF5679D60937AECF5" : "breakout\/",
+    "0D37209FC75B31350D4F78563E9F03B8703EB229" : "breakout\/breakout\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "breakout",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "breakout.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ihowe6189\/breakout.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0D37209FC75B31350D4F78563E9F03B8703EB229"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ihowe6189\/breakoutApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0F351D6010ED5245093794EFF5679D60937AECF5"
+    }
+  ]
+}
