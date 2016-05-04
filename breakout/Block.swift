@@ -20,7 +20,7 @@ class Block {
         view = UIView()
         view.frame = CGRectMake(0, 0, 40, 10)
         view.backgroundColor = UIColor.yellowColor()
-        
+        behavior = UICollisionBehavior()
     }
     
     init(x: CGFloat, y: CGFloat) {
@@ -28,6 +28,7 @@ class Block {
         view = UIView()
         view.frame = CGRectMake(x, y, 40, 10)
         view.backgroundColor = UIColor.yellowColor()
+        behavior = UICollisionBehavior()
     }
     
     init(frame: CGRect) {
@@ -35,6 +36,7 @@ class Block {
         view = UIView()
         view.frame = frame
         view.backgroundColor = UIColor.yellowColor()
+        behavior = UICollisionBehavior()
     }
     
     func blockHit() {

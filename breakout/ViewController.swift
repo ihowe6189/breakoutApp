@@ -12,6 +12,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
 
     var ball = UIView()
     var paddle = UIView()
+    var deadZone = UIView()
     var dynamicAnimator = UIDynamicAnimator()
     var blockArray = [Block]()
     
@@ -28,12 +29,17 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         ball.clipsToBounds = true
         view.addSubview(ball)
         
-        //Add a red paddle object to the view
+        //Add a paddle object to the view
         paddle = UIView(frame: CGRectMake(view.center.x , view.center.y * 1.7, 80, 20))
         paddle.layer.cornerRadius = 5
         paddle.clipsToBounds = true
-        paddle.backgroundColor = UIColor.redColor()
+        paddle.backgroundColor = UIColor.blueColor()
         view.addSubview(paddle)
+        
+        //Add a uiView to detect a collision at the bottom of the screen
+        deadZone = UIView(frame: CGRectMake(0,view.frame.height - 10, view.frame.width, 10))
+        deadZone.backgroundColor = UIColor.redColor()
+        view.addSubview(deadZone)
         
         //Setup Block Array
         
@@ -77,7 +83,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
     
     func resetBlockCollisions() {
         //create dynamic animator for paddle
-        let paddleDynamicBehavior = UIDynamicItemBehavior(items: [paddle])
+        let paddleDynamicBehavior = UIDynamicItemBehavior(items: [paddle, deadZone])
         paddleDynamicBehavior.density = 10000
         paddleDynamicBehavior.resistance = 100
         paddleDynamicBehavior.allowsRotation = false
@@ -85,10 +91,11 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         
         for blockObject in blockArray {
             if blockObject.blockStatus != 0 {
-                let collisionBehavior = UICollisionBehavior(items: [ball, paddle, blockObject.view])
+                let collisionBehavior = UICollisionBehavior(items: [ball, paddle, deadZone, blockObject.view])
                 collisionBehavior.translatesReferenceBoundsIntoBoundary = true
                 collisionBehavior.collisionMode = .Everything
                 collisionBehavior.collisionDelegate = self
+                blockObject.behavior = collisionBehavior
                 dynamicAnimator.addBehavior(collisionBehavior)
                 
                 let blockDynamicBehavior = UIDynamicItemBehavior(items: [blockObject.view])
@@ -133,9 +140,47 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
             if detectionArea.contains(p){
                 print("block hit")
                 blockObject.blockHit()
-                //dynamicAnimator.removeBehavior()
+                if blockObject.blockStatus == 0 {
+                    dynamicAnimator.removeBehavior(blockObject.behavior)
+                }
                 break
             }
         }
+        var allBlocksCleared = true
+        for blockObject in blockArray {
+            if blockObject.blockStatus != 0 {
+                allBlocksCleared = false
+            }
+        }
+        if allBlocksCleared {
+            createEndgameScreen(true)
+        }
+        else if p.y > paddle.frame.origin.y + 20 {
+            createEndgameScreen(false)
+        }
+    }
+    
+    func createEndgameScreen(victory: Bool) {
+        var alertController = UIAlertController()
+        if victory {
+            alertController = UIAlertController(title: "Oh look, You won!", message: "Would you like to play again?", preferredStyle: .Alert)
+        }
+        else {
+            alertController = UIAlertController(title: "Unsuprisingly, you lost.", message: "Would you like to play again?", preferredStyle: .Alert)
+        }
+        let cancelAction = UIAlertAction(title: "Nah.", style: .Cancel, handler:
+            {
+                (action) -> Void in
+        })
+        let okAction = UIAlertAction(title: "Of course!", style: .Default, handler:
+            {
+                (action) -> Void in
+                //Add code to reset all the things
+                self.dynamicAnimator.removeAllBehaviors()
+                self.resetBall()
+                self.resetBlockCollisions()
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction((okAction))
     }
 }
