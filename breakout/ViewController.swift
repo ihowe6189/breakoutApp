@@ -41,29 +41,36 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         deadZone.backgroundColor = UIColor.redColor()
         view.addSubview(deadZone)
         
-        //Setup Block Array
+        resetBlockArray()
+        resetBall()
+        resetBlockCollisions()
+        
+    }
+    
+    func resetBlockArray() {
+        blockArray.removeAll()
+        for subView in view.subviews {
+            if subView.tag == 2 {
+                //Instert code to remove block from view
+            }
+        }
         
         let totalWidth = view.frame.width - 30
         let totalHeight = view.frame.height / 3
         let widthIncrement = totalWidth / 5
         let heightIncrement = totalHeight / 8
-        var counter = 0
         for i in 0...4 {
             for j in 0...3 {
                 let blockFrame = CGRectMake(15 + CGFloat(i) * widthIncrement, 15 + CGFloat(j) * heightIncrement, widthIncrement - 15, heightIncrement - 15)
                 let newBlock = Block(frame: blockFrame)
-                newBlock.view.tag = counter
-                counter += 1
+                newBlock.view.tag = 2
                 blockArray.append(newBlock)
                 view.addSubview((blockArray.last?.view)!)
                 
             }
         }
-        
-        resetBall()
-        resetBlockCollisions()
-        
     }
+    
 
     func resetBall() {
         dynamicAnimator.removeAllBehaviors()
@@ -171,6 +178,7 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
         let cancelAction = UIAlertAction(title: "Nah.", style: .Cancel, handler:
             {
                 (action) -> Void in
+                fatalError()
         })
         let okAction = UIAlertAction(title: "Of course!", style: .Default, handler:
             {
@@ -179,8 +187,10 @@ class ViewController: UIViewController, UICollisionBehaviorDelegate {
                 self.dynamicAnimator.removeAllBehaviors()
                 self.resetBall()
                 self.resetBlockCollisions()
+                self.resetBlockArray()
         })
         alertController.addAction(cancelAction)
         alertController.addAction((okAction))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
